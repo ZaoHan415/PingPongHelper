@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+    <androidx.preference.SwitchPreference
+        android:defaultValue="false"
+        android:key="video_switch"
+        android:summary="Use an input video for debug"
+        android:title="VideoInput" />
+</androidx.preference.PreferenceScreen>
