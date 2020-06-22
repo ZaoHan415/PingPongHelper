@@ -7,4 +7,9 @@
         android:key="video_switch"
         android:summary="Use an input video for debug"
         android:title="VideoInput" />
+    <androidx.preference.EditTextPreference
+        android:defaultValue="/123"
+        android:key="dir_text"
+        android:summary="hahah"
+        android:title="Directory"/>
 </androidx.preference.PreferenceScreen>

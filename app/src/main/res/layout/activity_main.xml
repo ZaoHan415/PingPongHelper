@@ -28,6 +28,12 @@
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_input_add" />
 
-    <include layout="@layout/content_main" />
+    <fragment
+        android:id="@+id/FirstFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="diy.czarja.pingponghelper.displayFragment"
+        android:label="@string/first_fragment_label">
+    </fragment>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
