@@ -1,11 +1,9 @@
 package diy.czarja.pingponghelper;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.hardware.Camera;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -16,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
-import androidx.preference.PreferenceManager;
 
 import org.bytedeco.ffmpeg.global.avutil;
 import org.bytedeco.javacv.AndroidFrameConverter;
@@ -52,21 +49,6 @@ public class VideoPreview extends SurfaceView implements SurfaceHolder.Callback 
     //constructor
     public VideoPreview(Context context, AttributeSet attrs) {
         super(context, attrs);
-        // read video directory from settings
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.getContext());
-        String dir = sharedPreferences.getString("dir_text", "NotFound");
-        Log.d(LOGTAG, dir);
-        videoFile = new File(dir);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    fetchFrames(videoFile);
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        }).start();
     }
 
     public void fetchFrames(File file) throws Exception {
@@ -154,7 +136,21 @@ public class VideoPreview extends SurfaceView implements SurfaceHolder.Callback 
 //        }
     }
 
-    public interface VideoViewListener {
+    public void setVideoFileDirectory(String dir){
+        videoFile = new File(dir);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    fetchFrames(videoFile);
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+   public interface VideoViewListener {
         /**
          * This method is invoked when camera preview has started. After this method is invoked
          * the frames will start to be delivered to client via the onCameraFrame() callback.

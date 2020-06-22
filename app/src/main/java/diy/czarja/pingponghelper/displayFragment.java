@@ -34,8 +34,12 @@ public class displayFragment extends Fragment implements CvCameraPreview.CvCamer
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         if(isVideoInput) {
+            // read video directory from settings
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.getContext());
+            String dir = sharedPreferences.getString("dir_text", null);
             videoView = (VideoPreview) view.findViewById(R.id.video_view);
             videoView.setVideoViewListener(this);
+            videoView.setVideoFileDirectory(dir);
         } else {
             cameraView = (CvCameraPreview) view.findViewById(R.id.camera_view);
             cameraView.setCvCameraViewListener(this);
